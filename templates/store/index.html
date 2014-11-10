@@ -1,0 +1,65 @@
+{% extends "store/base_store_page.html" %}
+
+{% block breadcrumbs %}
+  <ul class="breadcrumb">
+  {% for cat in bread_categories %} 
+    <li><a href="/category/{{cat.get_path_uri}}">{{ cat.name }}</a></li> 
+  {% endfor %}
+  </ul>
+{% endblock breadcrumbs %}
+
+{% block store_content %}
+  {% for category in render_categories %}
+    <div class="col-sm-6 col-md-4 catalog-thumbnail">
+      <a href="/category/{{category.get_path_uri}}" class="thumbnail">
+        <img class="catalog-image" src="{{ category.image_link }}">
+        <div class="caption">
+          <h5>{{ category.name }}</h5>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+  <div>
+    {% for product in products %}
+    <div class="col-sm-6 col-md-4">
+      <a href="/product/{{product.id}}" class="thumbnail catalog-thumbnail">
+        <img class="catalog-image" src="{{ product.image_link }}">
+
+        <h5 class='caption'>
+          {{ product.name }}
+        </h5>
+
+        <span class="catalog-rating ">
+          <input id="product-rating-{{product.id}}" class="rating-stars">
+          <script>
+            $(document).ready(function(){
+              $("#product-rating-{{product.id}}").rating({'size': 'xs', 'glyphicon': false, 'stars': 1, 'min': 0, 'max': 1, 'step': 1, 'showCaption': false, 'showClear': false, 'disabled': true});
+              $("#product-rating-{{product.id}}").rating('update', {{product.get_average_rating}}/5);
+            });
+          </script>
+        </span>
+
+        <span class="catalog-price">
+          {{ product.price_ukr }} грн.
+        </span>
+
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  {% if products.paginator.page_range|length > 1 %}
+    <ul class="pagination">
+      <li class="{% if not products.has_previous %}disabled{% endif %}">
+        <a href="?page={% if products.has_previous %}{{products.previous_page_number}}{% endif %}">Previous</a>
+      </li>
+      {% for page in products.paginator.page_range %}
+        <li class="{% if current_page == page %}active{% endif %}">
+            <a href="?page={{page}}">{{page}}</a>
+        </li>
+      {% endfor %}
+      <li class="{% if not products.has_next %}disabled{% endif %}">
+        <a href="?page={% if products.has_next %}{{ products.next_page_number }}{% endif %}">Next</a>
+      </li>
+    </ul>
+  {% endif %}
+{% endblock store_content %}

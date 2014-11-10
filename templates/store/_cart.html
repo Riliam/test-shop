@@ -1,0 +1,47 @@
+{% load mathfilters %}
+
+<table class='table table-striped'>
+  <tr>
+    <th>Фото</th>
+    <th>Название товара</th>
+    <th>Цена за 1 шт.</th>
+    <th>Количество</th>
+    <th>Цена за все позиции</th>
+    <th></th>
+  </tr>
+  {% for item in cart.items %}
+    <tr>
+      <td><img src="{{item.product.image_link}}" style="max-height: 150px; max-width: 80px"></td>
+      <td><a href="/product/{{item.product.id}}">{{ item.product.name }}</a></td>
+      <td>{{ item.price }} грн.</td>
+      <td>{{ item.quantity }} шт.</td>
+      <td>{{ item.price|mul:item.quantity }} грн.</td>
+      <td><a href="#" class="close" data-product-id="{{item.product.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></a></td>
+      <script>
+      $(document).ready(function() {
+        $('tr > td > a.close').on('click', function() {
+          var pid = $(this).attr('data-product-id')
+          $.ajax({
+            url: '/remove/' + pid,
+            type: 'get',
+            success: function(response) {
+              $('.cart-products-table').html(response.table_html);
+              $('#products-in-cart').html(response.products_in_cart);
+              $('#cart-total-sum').html(response.cart_total_sum);
+            },
+            error: function() { alert("Error"); }
+          });
+        });
+      });
+      </script>
+    </tr>
+  {% endfor %}
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>Всего</th>
+    <th>{{cart.total}} грн.</th>
+    <th></th>
+  </tr>
+</table>

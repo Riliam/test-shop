@@ -1,0 +1,12 @@
+<form role="form" id="backcall-form" method="post" action="/backcall">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="back-call-name">Введите ваше имя</label><em> (чтобы наш менеджер знал, как к вам обращаться)</em>
+    <input type="text" class="form-control" id="back-call-name" name="back_call_name" placeholder="Как к вам обращаться">
+  </div>
+  <div class="form-group">
+    <label for="back-call-phonenumber">Номер телефона</label><em> (по которому наш менеджер позвонит в течение часа)</em>
+    <input type="text" class="form-control" id="back-call-phonenumber" name="back_call_phonenumber" placeholder="+38(099)555-55-55">
+  </div>
+  <button class="btn btn-default" id="backcall-button">Отправить запрос</button>
+</form>

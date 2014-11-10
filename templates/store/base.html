@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+{% load pymorphy_tags %}
+{% load mathfilters %}
+
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="{% static 'store/bootstrap/css/bootstrap.min.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'store/bootstrap/css/bootstrap-theme.min.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'store/jstree/themes/default/style.min.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'store/style.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'store/star-rating/star-rating.min.css' %}" type="text/css">
+
+  <script src="{% static 'store/jquery-2.1.1.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'store/jstree/jstree.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'store/bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'store/star-rating/star-rating.min.js' %}" type="text/javascript"></script>
+</head>
+
+<body>
+  <div class="container">
+    {% block header %}
+    <div class="page-header">
+      <div class="row">
+        <div class="col-md-3"><a href="/">Интернет-магазин</a></div>
+        <div class="col-md-3">
+          <ul>
+            <li>Доставка по Украине</li>
+            <li>Разумные цены</li>
+            <li>Акции, скидки</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <p><span class="glyphicon glyphicon-earphone"></span> МТС: (050) 555-55-55</p>
+          <p><span class="glyphicon glyphicon-earphone"></span> Киевстар: (098) 555-55-55</p>
+          <p><span class="glyphicon glyphicon-earphone"></span> Life: (093) 555-55-55</p>
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" href="#modal-back-call" data-toggle="tooltip" data-placement="down" title="Оставьте свой телефон, мы перезвоним!" delay=0>Заказать обратный звонок</button>
+        </div>
+        <div class="col-md-3">
+          <div id="shopping-cart">
+            {% with items_count=cart.items|length %}
+            {% if items_count  == 1 %}
+              <p>В корзине <span id="products-in-cart">1</span> товар</p>
+            {% else %}
+              <p>В корзине <span id="products-in-cart">{{ items_count }}</span> {{ "товар"|plural:items_count }}</p>
+            {% endif %}
+            {% endwith %}
+            <p>
+              На сумму <span id="cart-total-sum">{{ cart.total }}</span> грн.
+            </p>
+            <p>
+              <a id="id-show-cart-modal" data-toggle="modal" href="#modal-cart" >Просмотреть товары в корзине</a>
+            </p>
+            <p>
+              <a href="/checkout"><strong>Перейти к оформлению заказа</strong></a>
+            </p>
+          </div>
+        </div>
+      </div>  
+    </div>
+    {% endblock header %}
+
+    {% block menu %}
+    <ul class="nav nav-pills menu">
+      <li><a href="/">Главная</a></li>
+      <li><a href="/delivery">Доставка и оплата</a></li>
+      <li><a href="#">Акции</a></li>
+      <li><a href="#">Советы</a></li>
+      <li><a href="/contact">Контакты</a></li>
+    </ul>
+    {% endblock menu %}
+
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        {% block breadcrumbs %}
+        {% endblock breadcrumbs %}
+      </div>
+    </div>
+    
+    <div class="row">
+    {% block content %} 
+    {% endblock content %}
+    </div>
+
+    <hr>
+
+    <div class="row footer">
+    {% block footer %}
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-2">
+        <ul class="list-unstyled">
+          <li><a href="#">Главная</a></li>
+          <li><a href="#">Доставка и оплата</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <ul class="list-unstyled">
+          <li><a href="#">О магазине</a></li>
+          <li><a href="#">Часто задаваемые вопросы</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <ul class="list-unstyled">
+          <li><a href="#">Скидки</a></li>
+          <li><a href="#">Акции</a></li>
+          <li><a href="#">Лидеры продаж</a></li>
+          <li><a href="#">Статьи</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        Часы работы:<br>9.00 - 20.00<br><br>
+        Заказы через интернет - круглосуточно! 
+      </div>
+      <div class="col-md-2">
+        Интернет-магазин
+      </div>
+    {% endblock footer %}
+    </div>
+
+    <hr>
+
+  </div>
+
+  <script src="{% static 'store/script.js' %}" type="text/javascript"></script>
+  <!-- Modal back call-->
+  <div class="modal fade" id="modal-back-call" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Оставьте свой номер телефона, и наш менеджер свяжется с вами</h4>
+        </div>
+        <div class="modal-body">
+          <div class="feedback"></div>
+          <div class="back-call">
+            {% include "store/_backcall_form.html" %}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+  <!-- Modal cart -->
+  <div class="modal fade" id="modal-cart" tabindex="-1" role="dialog" aria-labelledby="myCart" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Товары, которые вы добавили с корзину</h4>
+        </div>
+        <div class="modal-body cart-in-modal-window">
+          <a href="/clear-cart" id="clear-cart" class="pull-right">Удалить все товары из корзины</a>
+          <div class="cart-products-table clearfix">
+            {% include "store/_cart.html" %}
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <a href="/checkout" type="button" class="btn btn-primary">Перейти к оформлению заказа</a>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+</body>
+</html>

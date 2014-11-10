@@ -1,0 +1,106 @@
+{% extends "store/base_store_page.html" %}
+
+{% load pymorphy_tags %}
+{% load bootstrap %}
+
+{% block breadcrumbs %}
+  <ul class="breadcrumb">
+  {% for cat in bread_categories %} 
+    <li><a href="/category/{{cat.get_path_uri}}">{{ cat.name }}</a></li> 
+  {% endfor %}
+  <li>{{product.name}}</li>
+  </ul>
+{% endblock breadcrumbs %}
+
+{% block store_content %}
+
+    <div class="col-md-3">
+      <a data-toggle="modal" href="#myModal">
+        <img class="img-thumbnail product-image pull-right" src="{{ product.image_link }}" alt="...">
+      </a>
+      <a class="pull-right" data-toggle="modal" href="#myModal">Просмотр</a>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">{{ product.name }}</h4>
+            </div>
+            <div class="modal-body">
+              <img class="img-rounded img-responsive center-block" src="{{ product.image_link }}" alt="{{ product.name }}" />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+
+
+    </div>
+    <div class="col-md-9">
+      <div class="product-description">
+        <h3>{{ product.name }}</h3>
+
+        <input id="product-rating" class="rating-stars" data-pid={{ product.id }}>
+
+        <script>
+          $(document).ready(function(){
+            $("#product-rating").removeClass("hidden");
+            $("#product-rating").rating({'min': 0, 'max': 5, 'step': 1, 'size': 'xs', 'showCaption': false, 'showClear': false});
+            $("#product-rating").rating('update', {{product.get_average_rating}});
+          });
+        </script>
+
+          {% with raters=product.raters %}
+          <p class="product-rating-info hidden">
+            {% if raters == 0 %}
+              (Пока никто не оценил этот продукт)
+
+            {% else %}
+              (Рейтинг продукта {{ product.get_average_rating }}
+              {% if raters == 1 %}
+                по мнению <span id="id-product-raters">{{ product.raters }} посетителя)
+              {% else %}
+                по мнению <span id="id-product-raters">{{ product.raters }}</span> {{ "посетитель"|inflect:"рд,мн" }})
+              {% endif %}
+            {% endif %}
+          </p>
+          {% endwith %}
+
+
+        <br>
+
+        <p class="description">
+          {{ product.description }}
+        </p>
+
+        <h4>Цена: {{ product.price_ukr }} грн.</h4> 
+        <button id="add-to-cart-button" class="btn btn-primary btn-sm pull-right" data-pid={{product.id}}>Добавить в корзину</button>
+        <div id="cart-info"></div>
+
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <br>
+      <div class="comments">
+        <h3>Отзывы</h3>
+        <hr>
+        {% for comment in comments %}
+          <h4>{{ comment.author_name }} <em style="font-size: 14px;">({{ comment.get_pretty_datetime }})</em></h4>
+          <p>{{ comment.body }}</p>
+          <hr>
+        {% endfor %}
+      </div>
+      <h4>Оставьте ваш отзыв о товаре "{{ product.name }}"</h4>
+      <form action="/product/{{ product.id }}" method="post" role="form">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <input type="submit" value="Submit" class="btn btn-default pull-right">
+      </form>
+    </div>
+{% endblock store_content %}

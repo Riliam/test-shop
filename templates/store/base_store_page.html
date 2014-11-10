@@ -1,0 +1,51 @@
+{% extends "store/base.html" %}
+
+{% block content %}
+  <div class="col-md-3">
+
+    {% block categories %}
+      <div id="categories-tree">
+        <ul>
+        {% for category in categories %}
+          <li>
+            <a href="/category/{{ category.get_path_uri }}">{{ category.name }}</a>
+            <ul>
+            {% for subcategory in category.category_set.all %}
+              <li>
+                <a href="/category/{{ subcategory.get_path_uri }}">{{ subcategory.name }}</a>
+                <ul>
+                {% for subsubcategory in subcategory.category_set.all %}
+                  <li>
+                    <a href="/category/{{ subsubcategory.get_path_uri }}">{{ subsubcategory.name }}</a>
+                    <ul>
+                    {% for subsubsubcategory in subsubcategory.category_set.all %}
+                      <li>
+                        <a href="/category/{{ subsubsubcategory.get_path_uri }}">{{ subsubsubcategory.name }}</a>
+                    {% endfor %}
+                    </ul>
+                {% endfor %}
+                </ul>
+              </li>
+            {% endfor %}
+            </ul>
+          </li>
+        {% endfor %}
+        </ul>
+      </div>
+    {% endblock categories %}
+  </div>
+
+  <div class="col-md-6">
+  {% block store_content %}
+  {% endblock store_content %}
+  </div>
+  
+  <div class="col-md-3">
+  {% block right_bar %}
+    <img src="http://placehold.it/200x200">
+    <br>
+    <img src="http://placehold.it/200x200">
+  {% endblock right_bar %}
+  </div>
+
+{% endblock content %}

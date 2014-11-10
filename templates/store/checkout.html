@@ -1,0 +1,44 @@
+{% extends "store/base.html" %}
+
+{% load bootstrap %}
+
+{% block content %}
+<div class="col-md-9 col-md-offset-1">
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingKievDelivery">
+        <h4 class="panel-title">
+
+          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseKievDelivery" aria-expanded="true" aria-controls="collapseKievDelivery">
+            Доставка курьерской службой по Киеву
+          </a>
+
+        </h4>
+      </div>
+      <div id="collapseKievDelivery" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingKievDelivery">
+        <div class="panel-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingNovaPoshta">
+        <h4 class="panel-title">
+
+          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNovaPoshta" aria-expanded="false" aria-controls="collapseNovaPoshta">
+            Доставка "Новой почтой"
+          </a>
+
+        </h4>
+      </div>
+      <div id="collapseNovaPoshta" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNovaPoshta">
+        <div class="panel-body">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock content %}
