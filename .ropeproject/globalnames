@@ -1,8 +1,8 @@
-€}q(Upopulate_store]qUpopulateqaUstore.forms]q(UKievDeliveryFormqUNovaPoshtaAddressDeliveryFormqU NovaPoshtaDepartmentDeliveryFormqUCommentFormqeUstore.models]q	(UCategoryq
-UProductqUOrderDetailqUEXCHANGE_RATEqUMARGINqUOrderqUCommentqeU
-store.urls]qUurlpatternsqaUpopulate_categories]q(UpopulateqUmainqeUshop_project.settings]q(UCART_PRODUCT_MODELqU	DATABASESqUMIDDLEWARE_CLASSESqUROOT_URLCONFqU
-EMAIL_PORTqULANGUAGE_CODEqUUSE_I18NqU
-SECRET_KEYqUPYMORPHY_DICTSqUBASE_DIRq UEMAIL_HOST_PASSWORDq!UTEMPLATE_PATHq"U	TIME_ZONEq#UWSGI_APPLICATIONq$UALLOWED_HOSTSq%U
-EMAIL_HOSTq&USTATIC_PATHq'UTEMPLATE_DIRSq(U
-STATIC_URLq)UUSE_L10Nq*UDEBUGq+UUSE_TZq,UINSTALLED_APPSq-UEMAIL_USE_TLSq.USTATICFILES_DIRSq/UTEMPLATE_DEBUGq0UEMAIL_HOST_USERq1eUstore.views]q2(Uget_cartq3Uadd_productq4Urender_categoryq5UMainMockq6Uupdate_cartq7Ushow_contact_pageq8Urate_productq9U
-clear_cartq:Ucheckout_orderq;Uremove_productq<Ushow_delivery_pageq=Ushow_productsq>Ureceive_backcall_queryq?Uget_categoriesq@Uproduct_pageqAeUshop_project.urls]qBUurlpatternsqCaUstore.admin]qD(UProductInLineqEUCategoryAdminqFeu.
+€}q(Uwsgi]qUapplicationqaUpopulate_store]qUpopulateqaUstore.forms]q(UKievDeliveryFormqUNovaPoshtaAddressDeliveryFormqU NovaPoshtaDepartmentDeliveryFormq	UCommentFormq
+eUstore.models]q(UCategoryqUProductqUOrderDetailqUEXCHANGE_RATEqUMARGINqUOrderqUCommentqeU
+store.urls]qUurlpatternsqaUpopulate_categories]q(UpopulateqUmainqeUshop_project.local_settings]q(USTATICFILES_DIRSqUSTATIC_ROOTqeUshop_project.settings]q(UCART_PRODUCT_MODELqU	DATABASESqUMIDDLEWARE_CLASSESqUROOT_URLCONFqU
+EMAIL_PORTq ULANGUAGE_CODEq!UUSE_I18Nq"U
+SECRET_KEYq#UPYMORPHY_DICTSq$UBASE_DIRq%UEMAIL_HOST_PASSWORDq&UTEMPLATE_PATHq'USTATIC_ROOTq(U	TIME_ZONEq)UWSGI_APPLICATIONq*UALLOWED_HOSTSq+U
+EMAIL_HOSTq,USTATIC_PATHq-UTEMPLATE_DIRSq.U
+STATIC_URLq/UUSE_L10Nq0UDEBUGq1UUSE_TZq2UINSTALLED_APPSq3UEMAIL_USE_TLSq4USTATICFILES_DIRSq5USECURE_PROXY_SSL_HEADERq6UTEMPLATE_DEBUGq7UEMAIL_HOST_USERq8eUstore.views]q9(Uget_cartq:Uadd_productq;Urender_categoryq<UMainMockq=Uupdate_cartq>Ushow_contact_pageq?Urate_productq@U
+clear_cartqAUcheckout_orderqBUremove_productqCUshow_delivery_pageqDUshow_productsqEUreceive_backcall_queryqFUget_categoriesqGUproduct_pageqHeUshop_project.urls]qIUurlpatternsqJaUstore.admin]qK(UProductInLineqLUCategoryAdminqMeu.
